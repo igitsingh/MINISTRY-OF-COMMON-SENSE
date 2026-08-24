@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  
+}
+
+model Case {
+  id              String   @id @default(cuid())
+  title           String
+  satiricalReport String
+  score           Int
+  suggestedFix    String
+  imageUrl        String
+  locationLat     Float?
+  locationLng     Float?
+  type            String
+  status          String   @default("APPROVED")
+  createdAt       DateTime @default(now())
+}
