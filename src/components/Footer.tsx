@@ -11,6 +11,13 @@ const InstagramIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
+const XIcon = ({ size = 24, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+  </svg>
+);
+
 export default function Footer() {
   return (
     <footer className="bg-[var(--ministry-red)] text-[var(--ivory)] border-t-8 border-[var(--gold)] pt-16 pb-8 px-6 md:px-12 mt-auto">
@@ -20,7 +27,9 @@ export default function Footer() {
         <div className="space-y-4">
           <Link href="/" className="flex items-center gap-4 group inline-flex">
             <Image src="/new-official-logo.png" alt="Ministry Seal" width={60} height={60} className="rounded-full shadow-lg bg-white p-1 shrink-0 group-hover:scale-105 transition-transform" />
-            <h3 className="text-xl md:text-2xl font-serif font-black uppercase tracking-widest text-[var(--ivory)] leading-tight max-w-[200px]">Ministry of Common Sense</h3>
+            <h3 className="text-xl md:text-2xl font-serif font-black uppercase tracking-widest text-[var(--ivory)] leading-tight whitespace-nowrap">
+              MINISTRY OF<br />COMMON SENSE
+            </h3>
           </Link>
           <p className="font-mono text-sm text-white/70 max-w-xs leading-relaxed mt-2">
             Documenting the extraordinary lack of common sense in urban planning, infrastructure, and daily civic life since 2026.
@@ -28,38 +37,76 @@ export default function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div className="space-y-4">
-          <h4 className="font-black uppercase tracking-widest text-sm border-b-2 border-white/10 pb-2 inline-block">Official Directives</h4>
-          <ul className="space-y-3 font-mono text-sm">
-            <li><Link href="/about" className="hover:text-[var(--gold)] transition-colors">The Manifesto</Link></li>
-            <li><Link href="/archive" className="hover:text-[var(--gold)] transition-colors">Case Archive</Link></li>
-            <li><Link href="/heroes" className="hover:text-[var(--gold)] transition-colors">Hall of Heroes</Link></li>
-            <li><Link href="/join" className="hover:text-[var(--gold)] transition-colors">Become a Field Agent</Link></li>
-            <li><Link href="/submit" className="hover:text-white transition-colors text-[var(--gold)] font-bold">Submit Evidence</Link></li>
+        <div className="space-y-4 pt-2">
+          <h4 className="font-mono font-black uppercase tracking-[0.2em] text-[10px] text-[var(--gold)] mb-6">OFFICIAL DIRECTIVES</h4>
+          <ul className="space-y-3 font-mono text-sm text-white/80">
+            <li><Link href="/about" className="hover:text-white transition-colors">Why We Exist</Link></li>
+            <li><Link href="/doctrines" className="hover:text-white transition-colors">Ministry Doctrines</Link></li>
+            <li><Link href="/why-small-things-matter" className="hover:text-white transition-colors">Why Small Things Matter</Link></li>
+            <li><Link href="/forum" className="hover:text-white transition-colors">The Forum</Link></li>
+            <li><Link href="/library" className="hover:text-white transition-colors">The Library</Link></li>
+            <li><Link href="/submit" className="hover:text-white transition-colors">Submit Evidence</Link></li>
           </ul>
         </div>
 
         {/* Contact & Socials */}
-        <div className="space-y-4">
-          <h4 className="font-black uppercase tracking-widest text-sm border-b-2 border-white/10 pb-2 inline-block">Secure Comms</h4>
-          <div className="space-y-4 font-mono text-sm">
-            <a 
-              href="https://instagram.com/mini.of.commonsense" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:text-[var(--gold)] transition-colors"
-            >
-              <InstagramIcon size={20} className="text-[var(--gold)]" />
-              @mini.of.commonsense
-            </a>
-            <a 
-              href="mailto:official.ministryofcommonsense@gmail.com" 
-              className="flex items-center gap-3 hover:text-[var(--gold)] transition-colors break-all"
-            >
-              <Mail size={20} className="text-[var(--gold)] shrink-0" />
-              official.ministryofcommonsense@gmail.com
-            </a>
+        <div className="space-y-10 pt-2">
+          
+          <div>
+            <h4 className="font-mono font-black uppercase tracking-[0.2em] text-[10px] text-[var(--gold)] mb-6">SECURE COMMS</h4>
+            <div className="space-y-4 font-mono text-sm text-white/80">
+              <a 
+                href="https://x.com/miofcommonsense" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:text-white transition-colors"
+              >
+                <XIcon size={16} className="text-white/60 shrink-0" />
+                X
+              </a>
+              <a 
+                href="https://instagram.com/mini.of.commonsense" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:text-white transition-colors"
+              >
+                <InstagramIcon size={16} className="text-white/60 shrink-0" />
+                Instagram
+              </a>
+              <a 
+                href="mailto:official.ministryofcommonsense@gmail.com" 
+                className="flex items-center gap-4 hover:text-white transition-colors break-all"
+              >
+                <Mail size={16} className="text-white/60 shrink-0" />
+                official.ministryofcommonsense@gmail.com
+              </a>
+            </div>
           </div>
+
+          <div>
+            <h4 className="font-mono font-black uppercase tracking-[0.2em] text-[10px] text-[var(--gold)] mb-6">FOUNDER</h4>
+            <div className="space-y-4 font-mono text-sm text-white/80">
+              <a 
+                href="https://x.com/isachinsingh" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:text-white transition-colors"
+              >
+                <XIcon size={16} className="text-white/60 shrink-0" />
+                Sachin Singh
+              </a>
+              <a 
+                href="https://instagram.com/isachinsingh" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 hover:text-white transition-colors"
+              >
+                <InstagramIcon size={16} className="text-white/60 shrink-0" />
+                Sachin Singh
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
 

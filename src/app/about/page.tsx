@@ -1,87 +1,66 @@
-import React from 'react';
 import Header from '@/components/Header';
-import { BookOpen, AlertTriangle, Eye, ArrowRight } from 'lucide-react';
+import { Flag, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="bg-[var(--ivory)] text-[var(--charcoal)] font-sans flex flex-col w-full">
+    <div className="min-h-screen bg-[var(--ivory)] text-[var(--charcoal)] font-sans">
       <Header />
-      
-      <main className="flex-1 w-full max-w-[1000px] mx-auto px-6 md:px-12 py-16 md:py-24">
+
+      <main className="max-w-4xl mx-auto p-6 md:p-12 mt-8">
         
-        <div className="flex flex-col items-center text-center mb-16">
-          <BookOpen size={64} className="text-[var(--ministry-red)] mb-6" />
-          <div className="inline-block bg-[var(--charcoal)] text-[var(--gold)] font-black uppercase tracking-widest px-4 py-2 border-2 border-black mb-6 text-sm">
-            DECLARATION OF INTENT
-          </div>
-          <h1 className="text-4xl md:text-6xl font-serif font-black uppercase tracking-wider text-[var(--ministry-red)] leading-tight">
-            The Official Manifesto
+        <div className="mb-16 text-center border-b-8 border-black pb-12">
+          <Flag size={64} className="mx-auto text-[var(--ministry-red)] mb-6" />
+          <h1 className="text-5xl md:text-7xl font-serif font-black uppercase tracking-tighter text-[var(--charcoal)] leading-none mb-6">
+            Why This Movement Exists
           </h1>
-          <p className="font-mono text-gray-500 uppercase tracking-widest mt-4 text-sm md:text-base">
-            Read carefully. Ignorance is no longer an excuse.
-          </p>
         </div>
 
-        <div className="prose prose-lg md:prose-xl max-w-none font-serif text-gray-800 leading-relaxed">
+        <div className="prose prose-lg md:prose-2xl max-w-none font-serif text-gray-800 leading-relaxed mb-16 space-y-8">
           
-          <p className="text-2xl md:text-3xl font-black text-center text-black mb-12 border-y-4 border-[var(--gold)] py-8">
-            "We believe that a society capable of launching rockets to Mars should be capable of building a pavement that doesn't try to assassinate its pedestrians."
+          <p className="font-bold text-3xl leading-snug">
+            The Ministry of Common Sense exists because many civic problems are not complicated.
           </p>
 
-          <div className="bg-white p-8 md:p-12 border-2 border-[var(--charcoal)] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] mb-16">
-            <h2 className="text-3xl font-black uppercase tracking-wider text-[var(--ministry-red)] mb-6 flex items-center gap-3">
-              <AlertTriangle size={32} />
-              The Problem
+          <p>
+            They persist not because they are unsolvable, but because nobody consistently documents them, prioritizes them, and follows them through to resolution. We believe that cleaner, safer, quieter, and more walkable neighborhoods improve daily life for absolutely everyone.
+          </p>
+          
+          <div className="bg-white border-l-8 border-[var(--ministry-red)] p-8 shadow-[8px_8px_0_0_#000] my-12">
+            <h2 className="text-2xl font-black uppercase tracking-widest text-[var(--ministry-red)] mb-4 font-sans">
+              Our Mission is Simple
             </h2>
-            <p className="mb-6">
-              Look around. We have normalized the absurd. We step over open manholes as if they are natural geological formations. We accept that trees must be encased in concrete. We treat zebra crossings as mere street art rather than functional safety zones. 
-            </p>
-            <p>
-              The erosion of common sense in our civic infrastructure is not just an inconvenience—it is an insult to our collective intelligence.
-            </p>
+            <ul className="list-disc pl-6 space-y-4 font-bold text-xl">
+              <li>Identify obvious problems.</li>
+              <li>Gather undeniable evidence.</li>
+              <li>Encourage immediate action.</li>
+              <li>Celebrate the results.</li>
+            </ul>
           </div>
 
-          <div className="bg-[#f4ebd0] p-8 md:p-12 border-l-[16px] border-[#d4c5a9] mb-16">
-            <h2 className="text-3xl font-black uppercase tracking-wider text-[var(--charcoal)] mb-6 flex items-center gap-3">
-              <Eye size={32} />
-              Our Core Directives
-            </h2>
-            
-            <ol className="space-y-8 list-none pl-0">
-              <li className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
-                <span className="bg-[var(--ministry-red)] text-white text-2xl font-black px-4 py-2 shrink-0">I</span>
-                <div>
-                  <h3 className="font-bold text-xl uppercase tracking-widest text-[var(--ministry-red)] mb-2">Observe & Document</h3>
-                  <p className="font-mono text-base text-gray-700">We do not look away. When we see civic absurdity, we lock in the coordinates, capture the evidence, and file it in the National Archives.</p>
-                </div>
-              </li>
-              <li className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
-                <span className="bg-[var(--ministry-red)] text-white text-2xl font-black px-4 py-2 shrink-0">II</span>
-                <div>
-                  <h3 className="font-bold text-xl uppercase tracking-widest text-[var(--ministry-red)] mb-2">Humiliate with Respect</h3>
-                  <p className="font-mono text-base text-gray-700">Anger is fleeting, but public embarrassment lasts forever. We use humor and satire as weapons of mass correction, shaming the system into working properly.</p>
-                </div>
-              </li>
-              <li className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
-                <span className="bg-[var(--ministry-red)] text-white text-2xl font-black px-4 py-2 shrink-0">III</span>
-                <div>
-                  <h3 className="font-bold text-xl uppercase tracking-widest text-[var(--ministry-red)] mb-2">Reward the Logical</h3>
-                  <p className="font-mono text-base text-gray-700">When basic civic sense is demonstrated, we celebrate it. The Hall of Heroes exists to honor those who do what should be painfully obvious to everyone else.</p>
-                </div>
-              </li>
-            </ol>
-          </div>
+          <p>
+            When citizens come together to demand and implement basic common sense in their urban environment, the entire culture shifts. What starts as a project to fix a single broken streetlight in Meerut becomes a framework for accountability across the country.
+          </p>
 
-          <div className="text-center py-12 border-t-4 border-[var(--ministry-red)]">
-            <h2 className="text-3xl font-black uppercase tracking-wider mb-6">Are you ready to restore order?</h2>
-            <Link href="/join" className="inline-flex items-center gap-3 bg-[var(--ministry-red)] text-white px-8 py-4 font-bold uppercase tracking-widest border-2 border-[var(--ministry-red)] hover:bg-green-900 transition-colors text-lg shadow-xl shadow-green-900/20">
-              Enlist as a Field Agent
-              <ArrowRight size={24} />
-            </Link>
-          </div>
+          <p>
+            This is not about politics. This is not about assigning blame. This is about taking ownership of the public spaces we all share.
+          </p>
 
+          <p className="font-bold text-[var(--ministry-red)]">
+            Meerut today. Goa tomorrow. Bengaluru next year. Hundreds of local communities contributing to a shared, national Common Sense civic network.
+          </p>
         </div>
+
+        <div className="text-center border-t-8 border-[var(--gold)] pt-12">
+          <h2 className="text-3xl font-black uppercase tracking-widest mb-8 font-sans">
+            Join the Movement
+          </h2>
+          <Link href="/join" className="inline-flex items-center justify-center gap-3 bg-[var(--ministry-red)] text-white font-black uppercase tracking-widest text-xl px-12 py-6 border-4 border-black hover:bg-red-900 transition-colors shadow-[8px_8px_0_0_#000] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000]">
+            Become A Field Agent
+            <ArrowRight size={28} />
+          </Link>
+        </div>
+
       </main>
     </div>
   );

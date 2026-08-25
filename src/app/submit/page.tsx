@@ -3,10 +3,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import Header from "@/components/Header";
 import Link from 'next/link';
 import Image from 'next/image';
 import { Crosshair, UploadCloud, FileWarning, ShieldAlert, Satellite, FileSearch } from 'lucide-react';
+import { submitCase } from '@/app/actions/submitCase';
 
 export default function SubmitEvidence() {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -17,22 +20,61 @@ export default function SubmitEvidence() {
   const [targetLocked, setTargetLocked] = useState(false);
   const [hasValidToken, setHasValidToken] = useState(true);
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [locationName, setLocationName] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    
+    // Show immediate local preview
+    const objectUrl = URL.createObjectURL(file);
+    setImageUrl(objectUrl);
+
+    const uploadData = new FormData();
+    uploadData.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadData,
+      });
+      const data = await res.json();
+      
+      if (data.success) {
+        setImageUrl(data.imageUrl);
+      } else {
+        alert("Upload failed: " + data.error);
+        setImageUrl("");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error uploading file.");
+      setImageUrl("");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Evidence Submission: Incident Report`;
-    const body = `
-INCIDENT REPORT
----------------
-COORDINATES: LAT ${lat}, LNG ${lng}
-TARGET LOCKED: ${targetLocked ? 'YES' : 'NO'}
-
-DESCRIPTION:
-${description}
-
-[PLEASE ATTACH YOUR PHOTO EVIDENCE TO THIS EMAIL BEFORE SENDING]
-    `;
-    window.location.href = `mailto:official.ministryofcommonsense@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (!imageUrl) {
+      alert("Please upload visual evidence.");
+      return;
+    }
+    
+    const formData = new FormData();
+    formData.append('imageUrl', imageUrl);
+    formData.append('description', description);
+    formData.append('lat', lat.toString());
+    formData.append('lng', lng.toString());
+    // In a real app we'd reverse-geocode or get city/ward from user input
+    // formData.append('city', 'New Delhi'); 
+    
+    await submitCase(formData);
   };
 
   useEffect(() => {
@@ -55,18 +97,61 @@ ${description}
           zoom: zoom
         });
 
+        const geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          marker: false,
+          placeholder: 'Search location...',
+          countries: 'in',
+        });
+        map.current.addControl(geocoder, 'top-left');
+
+        // Fix for React/Next.js rendering the map before container has dimensions
+        setTimeout(() => {
+          if (map.current) {
+            map.current.resize();
+          }
+        }, 100);
+
         map.current.on('move', () => {
           if (!map.current) return;
           setLng(parseFloat(map.current.getCenter().lng.toFixed(4)));
           setLat(parseFloat(map.current.getCenter().lat.toFixed(4)));
           setZoom(parseFloat(map.current.getZoom().toFixed(2)));
         });
+
+        map.current.on('moveend', async () => {
+          if (!map.current) return;
+          const currentLng = map.current.getCenter().lng;
+          const currentLat = map.current.getCenter().lat;
+          try {
+            const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${currentLng},${currentLat}.json?access_token=${mapboxgl.accessToken}`);
+            const data = await res.json();
+            if (data.features && data.features.length > 0) {
+              setLocationName(data.features[0].place_name);
+            } else {
+              setLocationName("Unknown Location");
+            }
+          } catch (e) {
+            console.error("Reverse geocoding failed", e);
+          }
+        });
+
+        // Trigger initial reverse geocode
+        map.current.fire('moveend');
       } catch (err) {
         console.error("Mapbox init error:", err);
         setHasValidToken(false);
       }
     }
-  }, [lng, lat, zoom]);
+
+    return () => {
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[var(--ivory)] text-[var(--charcoal)] font-sans">
@@ -96,7 +181,7 @@ ${description}
           
           <div className="relative flex-1 min-h-[400px] bg-black">
             {hasValidToken ? (
-              <div ref={mapContainer} className="absolute inset-0" />
+              <div ref={mapContainer} className="absolute inset-0 w-full h-full" style={{ width: '100%', height: '100%' }} />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-red-600 font-mono text-center p-6 border-4 border-dashed border-red-900 m-4">
                 <Satellite size={48} className="mb-4 opacity-50 animate-pulse" />
@@ -120,6 +205,12 @@ ${description}
           </div>
 
           <div className="bg-white p-4 border-t-4 border-[var(--ministry-red)]">
+            {locationName && (
+              <div className="font-mono text-xs mb-3 text-[var(--charcoal)] font-bold bg-gray-100 p-2 border border-gray-300">
+                <span className="text-[var(--ministry-red)] mr-2">DETECTED REGION:</span> 
+                {locationName}
+              </div>
+            )}
             <div className="flex justify-between items-center font-mono text-sm mb-4 text-[var(--ministry-red)] font-bold">
               <div>LAT: {lat}</div>
               <div>LNG: {lng}</div>
@@ -160,10 +251,29 @@ ${description}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block font-bold mb-2 uppercase text-sm tracking-wider text-[var(--ministry-red)]">Visual Evidence (Required)</label>
-              <div className="border-2 border-dashed border-[var(--ministry-red)] bg-white rounded p-8 text-center hover:bg-[#fcfaf5] transition-colors cursor-pointer group">
-                <UploadCloud size={48} className="mx-auto text-gray-400 group-hover:text-[var(--gold)] transition-colors mb-4" />
-                <p className="font-bold text-lg text-[var(--charcoal)]">Click to Upload Photo</p>
-                <p className="text-sm text-gray-500 mt-2 font-mono">Note: Photo will need to be attached manually in your email client.</p>
+              
+              <div className="relative">
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={handleImageUpload} 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                  disabled={isUploading}
+                />
+                <div className={`border-2 border-dashed border-[var(--ministry-red)] bg-white rounded p-8 text-center transition-colors group ${isUploading ? 'opacity-50' : 'hover:bg-[#fcfaf5]'}`}>
+                  {imageUrl ? (
+                    <div className="relative w-full h-48 mb-4">
+                      <Image src={imageUrl} alt="Uploaded evidence" fill className="object-cover rounded" />
+                    </div>
+                  ) : (
+                    <UploadCloud size={48} className="mx-auto text-gray-400 group-hover:text-[var(--gold)] transition-colors mb-4" />
+                  )}
+                  
+                  <p className="font-bold text-lg text-[var(--charcoal)]">
+                    {isUploading ? 'Uploading to Database...' : imageUrl ? 'Evidence Attached (Click to change)' : 'Click to Upload Photo'}
+                  </p>
+                  {!imageUrl && <p className="text-sm text-gray-500 mt-2 font-mono">Image is required for AI Analysis.</p>}
+                </div>
               </div>
             </div>
 
@@ -181,7 +291,7 @@ ${description}
 
             <button type="submit" className="w-full bg-[var(--ministry-red)] text-[var(--ivory)] font-black tracking-widest uppercase py-4 border-b-4 border-black hover:bg-green-900 transition-colors flex items-center justify-center gap-2">
               <FileWarning size={20} className="text-[var(--gold)]" />
-              Transmit to Ministry AI
+              Transmit to Central Bureau
             </button>
             <p className="text-center font-mono text-xs text-gray-500 mt-2">
               Opens email client to send to official.ministryofcommonsense@gmail.com
