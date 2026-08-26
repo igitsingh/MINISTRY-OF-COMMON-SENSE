@@ -16,7 +16,7 @@ const containerVariants = {
 
 const bracketVariants = {
   hidden: { opacity: 0, scale: 1.5 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "circOut" } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "circOut" as const } },
 };
 
 export default function Home() {
