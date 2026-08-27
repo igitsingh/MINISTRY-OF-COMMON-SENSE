@@ -3,89 +3,37 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model Agent {
-  id             String    @id @default(cuid())
-  name           String
-  city           String
-  area           String
-  joinedAt       DateTime  @default(now())
-  casesReported  Int       @default(0)
-  casesResolved  Int       @default(0)
-  status         String    @default("ACTIVE")
-  focusAreas     String?
-  cases          Case[]
+model Applicant {
+  id               String   @id @default(cuid())
+  candidate_number String   @unique
+  name             String
+  email            String   @unique
+  answers          String
+  status           String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt        DateTime @default(now())
+  member           Member?
 }
 
-model Case {
+model Member {
   id              String   @id @default(cuid())
-  title           String
-  description     String?
-  score           Int      @default(0) // legacy
-  suggestedFix    String?
-  imageUrl        String
-  afterImageUrl   String?
-  locationLat     Float?
-  locationLng     Float?
-  locationName    String?
-  city            String?
-  ward            String?
-  category        String   @default("General")
-  type            String   @default("CIVIC_INCIDENT")
-  violationLevel  String?
-  status          String   @default("REPORTED") // REPORTED, ACKNOWLEDGED, IN_PROGRESS, RESOLVED
-  createdAt       DateTime @default(now())
-  
-  // Timeline dates
-  reportedAt      DateTime @default(now())
-  acknowledgedAt  DateTime?
-  inProgressAt    DateTime?
-  resolvedAt      DateTime?
-  
-  // Community Action Stats
-  supportersCount Int      @default(0)
-  emailsSentCount Int      @default(0)
-  remindersSentCount Int   @default(0)
-
-  agentName       String?
-  agentId         String?
-  agent           Agent?   @relation(fields: [agentId], references: [id])
-  
-  authorityId     String?
-  authority       Authority? @relation(fields: [authorityId], references: [id])
-  
-  comments        Comment[]
+  member_id       String   @unique
+  applicant_id    String   @unique
+  access_key      String?  @unique // e.g. MOCS-7X41-Q2A
+  applicant       Applicant @relation(fields: [applicant_id], references: [id])
+  membership_type String   @default("STANDARD") // STANDARD, FOUNDING
+  status          String   @default("ACTIVE")
+  joined_date     DateTime @default(now())
 }
 
-model Comment {
-  id        String   @id @default(cuid())
-  text      String
-  imageUrl  String?
-  createdAt DateTime @default(now())
-  author    String
-  
-  caseId    String
-  case      Case     @relation(fields: [caseId], references: [id])
-}
-
-model Mission {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  active      Boolean  @default(true)
-}
-
-model Authority {
-  id              String   @id @default(cuid())
-  name            String
-  designation     String   // e.g., "Zonal Commissioner", "Executive Engineer"
-  department      String?  // e.g., "Roads & Infrastructure", "Sanitation"
-  jurisdiction    String   // e.g., "Meerut Cantt", "Ward 12"
-  city            String
-  email           String?
-  phone           String?
-  cases           Case[]   // Cases in their jurisdiction
+model Drop {
+  id           String   @id @default(cuid())
+  drop_id      String   @unique
+  title        String
+  visibility   String   @default("MEMBERS") // PUBLIC, MEMBERS, FOUNDING
+  release_date DateTime
 }

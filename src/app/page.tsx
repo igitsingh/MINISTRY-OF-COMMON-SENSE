@@ -27,16 +27,16 @@ export default function Home() {
     <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-24 text-center h-screen bg-black overflow-hidden relative">
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
-      <motion.div className="max-w-7xl mx-auto flex flex-col items-center gap-12 relative z-10 w-full">
+      <motion.div className="max-w-7xl mx-auto flex flex-col items-center gap-6 md:gap-12 relative z-10 w-full">
         
         <motion.div 
-          className="p-4"
+          className="p-2 md:p-4"
           variants={bracketVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1 
-            className="text-3xl md:text-6xl font-bold tracking-tighter uppercase text-neon flex justify-center whitespace-nowrap"
+            className="text-[6vw] sm:text-3xl md:text-6xl font-bold tracking-tighter uppercase text-neon flex justify-center whitespace-nowrap"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -54,7 +54,7 @@ export default function Home() {
                   key={i}
                   className="inline-block hover:text-white transition-colors duration-300"
                   style={{ 
-                    width: char === " " ? "1rem" : "auto",
+                    width: char === " " ? "0.5rem" : "auto",
                     padding: "0 1px" 
                   }}
                   variants={{
@@ -78,27 +78,34 @@ export default function Home() {
           </motion.h1>
         </motion.div>
         
-        <motion.p 
-          initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
-          animate={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
-          transition={{ delay: 1.2, duration: 0.6, ease: "circOut" }}
-          className="text-xl md:text-2xl font-bold text-white uppercase tracking-tight mt-8"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="space-y-3 md:space-y-4 max-w-lg mx-auto"
         >
-          COMMON SENSE IS NO LONGER COMMON.
-        </motion.p>
+          <p className="text-sm sm:text-base md:text-xl font-bold text-white uppercase tracking-widest px-4">
+            RECRUITMENT OPEN
+          </p>
+          <div className="text-[10px] sm:text-sm md:text-base text-gray-400 font-mono space-y-1 md:space-y-2 uppercase tracking-wide px-4">
+            <p>Applications for membership are currently being accepted.</p>
+            <p>Limited intake.</p>
+            <p>Applications reviewed periodically.</p>
+          </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.5, type: "spring", bounce: 0.5 }}
-          className="pt-4"
+          className="pt-4 md:pt-8 w-full px-6 md:px-0 flex justify-center"
         >
-          <button 
-            disabled
-            className="pixel-border px-8 py-4 inline-block text-xl font-bold uppercase tracking-tight opacity-50 cursor-not-allowed"
+          <Link 
+            href="/entry-protocol"
+            className="pixel-border px-6 py-4 w-full md:w-auto text-center text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300"
           >
-            ENTER THE MINISTRY
-          </button>
+            [ REQUEST ENTRY ]
+          </Link>
         </motion.div>
       </motion.div>
     </div>
