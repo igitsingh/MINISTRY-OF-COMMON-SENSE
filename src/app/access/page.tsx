@@ -36,7 +36,7 @@ export default function AccessGate() {
       >
         <div className="text-center pb-6 md:pb-8 border-b-2 md:border-b-4 border-white">
           <h1 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white">
-            PORTAL ACCESS
+            MINISTRY ACCESS
           </h1>
         </div>
 

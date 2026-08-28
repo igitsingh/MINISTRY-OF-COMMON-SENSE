@@ -3,7 +3,7 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
-  --neon-pink: #ff00ff; /* Used very sparingly: 1% */
+  --neon-pink: #e1127d; /* Used very sparingly: 1% */
 }
 
 @theme inline {

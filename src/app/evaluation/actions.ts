@@ -47,3 +47,19 @@ export async function submitEvaluation(formData: FormData) {
     return { error: "An error occurred while logging your evaluation." };
   }
 }
+
+export async function completePayment(candidate_number: string) {
+  try {
+    await prisma.applicant.update({
+      where: { candidate_number },
+      data: {
+        payment_status: "COMPLETED",
+        transaction_id: `MOCK-TXN-${Math.random().toString(36).substring(7).toUpperCase()}`
+      }
+    });
+    return { success: true };
+  } catch (error) {
+    console.error("Error completing payment:", error);
+    return { error: "Payment failed." };
+  }
+}

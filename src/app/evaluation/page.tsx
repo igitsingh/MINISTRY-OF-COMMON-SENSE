@@ -3,12 +3,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import * as motion from "framer-motion/client";
-import { submitEvaluation } from "./actions";
+import { submitEvaluation, completePayment } from "./actions";
 
 export default function Evaluation() {
   const router = useRouter();
   const [status, setStatus] = useState<"IDLE" | "SUBMITTING" | "ERROR">("IDLE");
   const [errorMessage, setErrorMessage] = useState("");
+  
+  const [paymentRequired, setPaymentRequired] = useState(false);
+  const [candidateId, setCandidateId] = useState("");
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
 
   async function handleSubmit(formData: FormData) {
     setStatus("SUBMITTING");
@@ -20,9 +24,76 @@ export default function Evaluation() {
       setStatus("ERROR");
       setErrorMessage(result.error);
     } else if (result.success && result.candidate_number) {
-      // Redirect to Waiting Room (Candidate Dashboard)
-      router.push(`/candidate/${result.candidate_number}`);
+      setCandidateId(result.candidate_number);
+      setPaymentRequired(true);
+      setStatus("IDLE");
     }
+  }
+
+  async function handleMockPayment() {
+    setPaymentProcessing(true);
+    setErrorMessage("");
+    
+    const result = await completePayment(candidateId);
+    
+    if (result.error) {
+      setErrorMessage(result.error);
+      setPaymentProcessing(false);
+    } else {
+      router.push(`/candidate/${candidateId}`);
+    }
+  }
+
+  if (paymentRequired) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center p-4 min-h-screen bg-black text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+        
+        <motion.div 
+          className="max-w-md w-full border-2 border-white/20 p-8 bg-black z-10 space-y-8 shadow-[0_0_50px_rgba(225,18,125,0.1)]"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="text-center space-y-4 border-b-2 border-white/20 pb-6">
+            <h2 className="text-2xl md:text-3xl font-[family-name:var(--font-brand)] tracking-tighter uppercase text-white">Application Fee</h2>
+            <p className="font-[family-name:var(--font-mono)] text-xs text-gray-400 uppercase tracking-widest leading-relaxed">
+              An $18.18 non-refundable fee is required to submit dossier:<br/>
+              <span className="text-white font-bold text-sm">{candidateId}</span>
+            </p>
+          </div>
+          
+          <div className="border-t border-b border-white/10 py-6 space-y-4">
+             <div className="flex justify-between font-[family-name:var(--font-mono)] text-sm text-gray-400 uppercase tracking-widest">
+               <span>EVALUATION PROTOCOL</span>
+               <span className="text-white">$18.18</span>
+             </div>
+             <div className="flex justify-between font-[family-name:var(--font-mono)] text-neon font-bold text-lg pt-4 border-t border-white/10">
+               <span>TOTAL DUE</span>
+               <span>$18.18</span>
+             </div>
+          </div>
+
+          <div className="space-y-4 pt-4">
+            {errorMessage && (
+              <div className="text-red-500 font-bold text-xs md:text-sm uppercase tracking-tighter text-center border-2 border-red-500 p-3 bg-red-950/20">
+                {errorMessage}
+              </div>
+            )}
+            <button 
+               onClick={handleMockPayment}
+               disabled={paymentProcessing}
+               className="w-full mocs-button p-4 md:p-6 font-[family-name:var(--font-mono)] font-bold uppercase tracking-widest disabled:opacity-50 text-sm md:text-base"
+            >
+               {paymentProcessing ? '[ AUTHORIZING... ]' : '[ AUTHORIZE $18.18 ]'}
+            </button>
+            <p className="text-center text-[10px] font-[family-name:var(--font-sans)] text-gray-500 uppercase tracking-widest">
+              SECURE PAYMENT GATEWAY (MOCK)
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    );
   }
 
   return (

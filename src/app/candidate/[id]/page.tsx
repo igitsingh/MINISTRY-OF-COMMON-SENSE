@@ -64,9 +64,9 @@ export default async function CandidateDashboard({ params }: { params: Promise<{
         {candidate.status === "APPROVED" && (
           <div className="pt-2 md:pt-4 space-y-4 px-4 md:px-0">
             <div className="border-2 border-white/20 p-4 md:p-6 text-center space-y-2 md:space-y-4 bg-white/5">
-              <div className="font-bold text-xs md:text-sm text-neon font-[family-name:var(--font-mono)] uppercase tracking-tighter animate-pulse">ACCESS KEY ISSUED</div>
+              <div className="font-bold text-xs md:text-sm text-neon font-[family-name:var(--font-mono)] uppercase tracking-tighter animate-pulse">FOUNDING MEMBER RECOGNIZED</div>
               <div className="text-xl md:text-3xl font-[family-name:var(--font-mono)] font-bold text-white uppercase tracking-tighter truncate">{candidate.member?.access_key || "PENDING-GENERATION"}</div>
-              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-sans)] uppercase tracking-tighter leading-tight mt-2 md:mt-4">Save this key. It is your only method of entry.</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-sans)] uppercase tracking-tighter leading-tight mt-2 md:mt-4">Save this key. It is your mark of acceptance.</div>
             </div>
             <Link 
               href="/access"

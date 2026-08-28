@@ -40,8 +40,8 @@ export default async function MemberPortal() {
             </p>
           </div>
           <div className="mt-4 md:mt-0 text-left md:text-right w-full md:w-auto">
-            <div className="font-bold text-[10px] md:text-xs text-gray-500 font-[family-name:var(--font-mono)] uppercase tracking-tighter">CLEARANCE</div>
-            <div className="font-bold text-base md:text-lg text-neon font-[family-name:var(--font-mono)] uppercase tracking-widest">{member.status}</div>
+            <div className="font-bold text-[10px] md:text-xs text-gray-500 font-[family-name:var(--font-mono)] uppercase tracking-tighter">STATUS</div>
+            <div className="font-bold text-base md:text-lg text-neon font-[family-name:var(--font-mono)] uppercase tracking-widest">FOUNDING MEMBER</div>
           </div>
         </div>
 
@@ -80,15 +80,17 @@ export default async function MemberPortal() {
                 <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white">
                   INTELLIGENCE
                 </h2>
-                <span className="text-xs text-gray-500 font-[family-name:var(--font-mono)] uppercase animate-pulse">NEW DIRECTIVE</span>
+                <span className="text-xs text-gray-500 font-[family-name:var(--font-mono)] uppercase animate-pulse">NEW DOCTRINE</span>
               </div>
               <p className="font-[family-name:var(--font-sans)] text-sm md:text-base text-gray-300 leading-relaxed">
-                Your first directive has been issued. Physical proximity to Sector 4 is required. Await coordinates.
+                The Founding Constitution has been ratified. Independent thought is now formally recognized. Review the doctrine.
               </p>
               <div className="pt-2">
-                <button className="text-xs font-[family-name:var(--font-mono)] font-bold uppercase text-white border-b border-white hover:text-neon hover:border-neon transition-colors pb-1">
-                  [ VIEW DIRECTIVE ]
-                </button>
+                <Link href="/">
+                  <button className="text-xs font-[family-name:var(--font-mono)] font-bold uppercase text-white border-b border-white hover:text-neon hover:border-neon transition-colors pb-1">
+                    [ READ CONSTITUTION ]
+                  </button>
+                </Link>
               </div>
             </div>
 
@@ -104,7 +106,7 @@ export default async function MemberPortal() {
                   ARTIFACT 001
                 </h2>
                 <div className="font-bold text-[10px] text-gray-400 font-[family-name:var(--font-mono)] uppercase mt-1">
-                  PHYSICAL MANIFESTATION
+                  CULTURAL ARTIFACT
                 </div>
               </div>
               
