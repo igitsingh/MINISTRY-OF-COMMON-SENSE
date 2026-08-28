@@ -25,7 +25,14 @@ export default function Home() {
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-24 text-center h-screen bg-black overflow-hidden relative">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      {/* Background Layer */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Gradient on all 4 sides using inset shadow */}
+        <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(255,0,255,0.15)]"></div>
+        
+        {/* Grain Texture */}
+        <div className="absolute inset-0 opacity-[0.08] mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      </div>
 
       <motion.div className="max-w-7xl mx-auto flex flex-col items-center gap-6 md:gap-12 relative z-10 w-full">
         
@@ -36,7 +43,7 @@ export default function Home() {
           animate="visible"
         >
           <motion.h1 
-            className="text-[6vw] sm:text-3xl md:text-6xl font-bold tracking-tighter uppercase text-neon flex justify-center whitespace-nowrap"
+            className="text-[6vw] sm:text-3xl md:text-6xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white flex justify-center whitespace-nowrap"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -84,10 +91,10 @@ export default function Home() {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="space-y-3 md:space-y-4 max-w-lg mx-auto"
         >
-          <p className="text-sm sm:text-base md:text-xl font-bold text-white uppercase tracking-widest px-4">
-            RECRUITMENT OPEN
+          <p className="text-sm sm:text-base md:text-xl font-bold text-white uppercase tracking-widest px-4 font-[family-name:var(--font-mono)]">
+            INTAKE: <span className="text-neon">ACTIVE</span>
           </p>
-          <div className="text-[10px] sm:text-sm md:text-base text-gray-400 font-mono space-y-1 md:space-y-2 uppercase tracking-wide px-4">
+          <div className="text-[10px] sm:text-sm md:text-base text-gray-400 font-[family-name:var(--font-sans)] space-y-1 md:space-y-2 uppercase tracking-wide px-4">
             <p>Applications for membership are currently being accepted.</p>
             <p>Limited intake.</p>
             <p>Applications reviewed periodically.</p>
@@ -102,7 +109,7 @@ export default function Home() {
         >
           <Link 
             href="/entry-protocol"
-            className="pixel-border px-6 py-4 w-full md:w-auto text-center text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300"
+            className="mocs-button font-[family-name:var(--font-mono)] px-8 py-4 w-full md:w-auto text-center text-sm sm:text-lg font-bold uppercase tracking-widest"
           >
             [ REQUEST ENTRY ]
           </Link>

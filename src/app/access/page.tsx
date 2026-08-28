@@ -34,9 +34,9 @@ export default function AccessGate() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-sm space-y-6 md:space-y-8 relative z-10 px-4 md:px-0"
       >
-        <div className="text-center pb-6 md:pb-8 border-b-2 md:border-b-4 border-neon">
-          <h1 className="text-xl md:text-2xl font-bold tracking-tighter uppercase text-neon">
-            RESTRICTED SECTOR
+        <div className="text-center pb-6 md:pb-8 border-b-2 md:border-b-4 border-white">
+          <h1 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white">
+            PORTAL ACCESS
           </h1>
         </div>
 
@@ -46,9 +46,9 @@ export default function AccessGate() {
               type="text" 
               name="access_key"
               required
-              placeholder="[ ENTER ACCESS KEY ]"
+              placeholder="[ ENTER MEMBER ID OR KEY ]"
               disabled={status === "VERIFYING"}
-              className="w-full bg-transparent border-2 border-white p-4 md:p-6 text-center text-white font-bold text-base md:text-lg tracking-tighter focus:outline-none focus:border-neon transition-colors uppercase placeholder:text-gray-700 disabled:opacity-50"
+              className="w-full bg-transparent border-2 border-white/50 p-4 md:p-6 text-center text-white font-[family-name:var(--font-mono)] font-bold text-base md:text-lg tracking-widest focus:outline-none focus:border-white transition-colors uppercase placeholder:text-gray-700 disabled:opacity-50"
             />
           </div>
 
@@ -62,9 +62,9 @@ export default function AccessGate() {
             <button 
               type="submit"
               disabled={status === "VERIFYING"}
-              className="w-full pixel-border p-4 md:p-6 font-bold uppercase tracking-tighter text-lg md:text-xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-50"
+              className="w-full mocs-button p-4 md:p-6 font-[family-name:var(--font-mono)] font-bold uppercase tracking-widest text-lg md:text-xl disabled:opacity-50"
             >
-              {status === "VERIFYING" ? "VERIFYING..." : "AUTHENTICATE"}
+              {status === "VERIFYING" ? "VERIFYING..." : "ENTER"}
             </button>
           </div>
         </form>

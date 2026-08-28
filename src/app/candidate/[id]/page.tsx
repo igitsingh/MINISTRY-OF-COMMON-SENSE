@@ -27,15 +27,15 @@ export default async function CandidateDashboard({ params }: { params: Promise<{
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       
       <div className="max-w-md w-full space-y-8 md:space-y-12 relative z-10">
-        <div className="text-center space-y-3 md:space-y-4 border-b-2 md:border-b-4 border-neon pb-4 md:pb-8">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tighter uppercase text-neon mb-4 md:mb-6">
-            APPLICATION RECORDED
+        <div className="text-center space-y-3 md:space-y-4 border-b-2 md:border-b-4 border-white pb-4 md:pb-8">
+          <h1 className="text-2xl md:text-3xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white mb-4 md:mb-6">
+            DOSSIER FILED
           </h1>
-          <div className="text-xs md:text-sm font-bold text-gray-300 space-y-1 md:space-y-2 uppercase tracking-tighter text-left max-w-sm mx-auto leading-tight px-4 md:px-0">
-            <p>REFERENCE: <span className="text-white">{candidate.candidate_number}</span></p>
-            <p>STATUS: <span className="text-neon">{candidate.status.replace('_', ' ')}</span></p>
-            <p>NEXT REVIEW WINDOW: 72 HOURS</p>
-            <p className="pt-2 md:pt-4 text-neon animate-pulse">DO NOT SUBMIT AGAIN.</p>
+          <div className="text-xs md:text-sm font-bold text-gray-400 font-[family-name:var(--font-sans)] space-y-1 md:space-y-2 uppercase tracking-tighter text-left max-w-sm mx-auto leading-tight px-4 md:px-0">
+            <p className="font-[family-name:var(--font-mono)]">REFERENCE: <span className="text-white">{candidate.candidate_number}</span></p>
+            <p className="font-[family-name:var(--font-mono)]">STATUS: <span className={candidate.status === "APPROVED" ? "text-neon" : "text-white"}>{candidate.status.replace('_', ' ')}</span></p>
+            <p className="font-[family-name:var(--font-mono)]">NEXT REVIEW WINDOW: 72 HOURS</p>
+            <p className="pt-2 md:pt-4 text-gray-500">DO NOT SUBMIT AGAIN.</p>
           </div>
         </div>
 
@@ -43,34 +43,34 @@ export default async function CandidateDashboard({ params }: { params: Promise<{
 
           <div className="space-y-4 md:space-y-6 pt-2 md:pt-4">
             <div className="flex justify-between">
-              <div className="font-bold text-[10px] md:text-xs text-gray-400 uppercase tracking-tighter">APPLICATIONS RECEIVED</div>
-              <div className="font-bold text-[10px] md:text-xs text-white tracking-tighter">{totalApplications.toLocaleString()}</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">APPLICATIONS RECEIVED</div>
+              <div className="font-bold text-[10px] md:text-xs text-white font-[family-name:var(--font-mono)] tracking-widest">{totalApplications.toLocaleString()}</div>
             </div>
             <div className="flex justify-between">
-              <div className="font-bold text-[10px] md:text-xs text-gray-400 uppercase tracking-tighter">PENDING REVIEW</div>
-              <div className="font-bold text-[10px] md:text-xs text-white tracking-tighter">{pendingReview.toLocaleString()}</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">PENDING REVIEW</div>
+              <div className="font-bold text-[10px] md:text-xs text-white font-[family-name:var(--font-mono)] tracking-widest">{pendingReview.toLocaleString()}</div>
             </div>
             <div className="flex justify-between">
-              <div className="font-bold text-[10px] md:text-xs text-gray-400 uppercase tracking-tighter">ACCEPTED</div>
-              <div className="font-bold text-[10px] md:text-xs text-white tracking-tighter">{accepted.toLocaleString()}</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">ACCEPTED</div>
+              <div className="font-bold text-[10px] md:text-xs text-white font-[family-name:var(--font-mono)] tracking-widest">{accepted.toLocaleString()}</div>
             </div>
             <div className="flex justify-between border-t-2 border-white/20 pt-4 md:pt-6">
-              <div className="font-bold text-[10px] md:text-xs text-neon uppercase tracking-tighter">CURRENT INTAKE</div>
-              <div className="font-bold text-[10px] md:text-xs text-white uppercase tracking-tighter animate-pulse">OPEN</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">CURRENT INTAKE</div>
+              <div className="font-bold text-[10px] md:text-xs text-neon font-[family-name:var(--font-mono)] uppercase tracking-tighter animate-pulse">OPEN</div>
             </div>
           </div>
         </div>
 
         {candidate.status === "APPROVED" && (
           <div className="pt-2 md:pt-4 space-y-4 px-4 md:px-0">
-            <div className="border-2 border-neon p-4 md:p-6 text-center space-y-2 md:space-y-4 bg-neon/10">
-              <div className="font-bold text-xs md:text-sm text-neon uppercase tracking-tighter animate-pulse">ACCESS KEY ISSUED</div>
-              <div className="text-xl md:text-3xl font-bold text-white uppercase tracking-tighter truncate">{candidate.member?.access_key || "PENDING-GENERATION"}</div>
-              <div className="font-bold text-[10px] md:text-xs text-gray-300 uppercase tracking-tighter leading-tight mt-2 md:mt-4">Save this key. It is your only method of entry.</div>
+            <div className="border-2 border-white/20 p-4 md:p-6 text-center space-y-2 md:space-y-4 bg-white/5">
+              <div className="font-bold text-xs md:text-sm text-neon font-[family-name:var(--font-mono)] uppercase tracking-tighter animate-pulse">ACCESS KEY ISSUED</div>
+              <div className="text-xl md:text-3xl font-[family-name:var(--font-mono)] font-bold text-white uppercase tracking-tighter truncate">{candidate.member?.access_key || "PENDING-GENERATION"}</div>
+              <div className="font-bold text-[10px] md:text-xs text-gray-400 font-[family-name:var(--font-sans)] uppercase tracking-tighter leading-tight mt-2 md:mt-4">Save this key. It is your only method of entry.</div>
             </div>
             <Link 
               href="/access"
-              className="w-full block text-center pixel-border p-4 font-bold uppercase tracking-tighter text-base md:text-lg hover:bg-white hover:text-black transition-colors duration-300"
+              className="w-full block text-center mocs-button p-4 font-[family-name:var(--font-mono)] font-bold uppercase tracking-widest text-base md:text-lg"
             >
               [ ENTER PORTAL ]
             </Link>

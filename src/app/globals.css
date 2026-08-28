@@ -2,22 +2,26 @@
 
 :root {
   --background: #000000;
-  --foreground: #e5e5e5;
-  --neon-pink: #ff00ff; /* Saturated neon pink matching OFF/BEAT */
+  --foreground: #ffffff;
+  --neon-pink: #ff00ff; /* Used very sparingly: 1% */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-neon: var(--neon-pink);
-  --font-sans: var(--font-graduate), sans-serif;
+  
+  /* Font Tiering */
+  --font-brand: var(--font-graduate), sans-serif; /* Tier 1 */
+  --font-mono: var(--font-mono), monospace;       /* Tier 2 & 4 */
+  --font-sans: var(--font-sans), sans-serif;      /* Tier 3 & 5 */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  letter-spacing: -0.04em; /* Tighter tracking for bold brutalist look */
+  letter-spacing: -0.02em;
 }
 
 ::selection {
@@ -25,20 +29,18 @@ body {
   color: var(--background);
 }
 
-/* Custom Pixelated Border Effect */
-.pixel-border {
-  position: relative;
-  background-color: var(--neon-pink);
-  color: var(--background);
-  /* Stepped corner cutouts for 8-bit retro aesthetic */
-  clip-path: polygon(
-    10px 0, calc(100% - 10px) 0, 
-    calc(100% - 10px) 10px, 100% 10px, 
-    100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), 
-    calc(100% - 10px) 100%, 10px 100%, 
-    10px calc(100% - 10px), 0 calc(100% - 10px), 
-    0 10px, 10px 10px
-  );
+/* Base interactive elements */
+.mocs-button {
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.mocs-button:hover {
+  border-color: var(--neon-pink);
+  background: transparent;
+  color: var(--neon-pink);
 }
 
 /* Bracket effect from Screenshot 1 */
