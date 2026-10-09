@@ -21,19 +21,17 @@ export default function EntryProtocol() {
             </h1>
             
             <div className="font-[family-name:var(--font-sans)] text-sm md:text-base text-gray-300 space-y-4 md:space-y-6 leading-relaxed">
-              <h3 className="font-bold text-xs md:text-sm text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">WHO ARE WE LOOKING FOR?</h3>
+              <h3 className="font-bold text-xs md:text-sm text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">KAUN CHAHIYE HAMEIN?</h3>
               
               <p className="hover:text-white transition-colors duration-300 leading-snug">
-                Not creators. Not vloggers. Not celebrities. Not athletes. Not singers. Not India's Got Latent applicants. Not even Ambani.
+                No influencers, no podcasters, aur "India's Got Latent" walon ki toh bilkul entry nahi. Ambani bhi aayega toh line mein lagega.
               </p>
               
               <p className="font-[family-name:var(--font-brand)] text-white text-lg md:text-xl uppercase tracking-tighter leading-tight pb-4 border-b-2 border-white/10">
-                We are looking for people who are actually different. People who have some sense (common).
+                WE JUST WANT PEOPLE WHO AREN'T NPCs. PEOPLE WITH ACTUAL COMMON SENSE.
               </p>
 
-              <p className="hover:text-white transition-colors duration-300 pt-2">The Ministry exists for those who question what others accept. People who notice contradictions.</p>
-              
-              <p className="hover:text-white transition-colors duration-300 text-neon font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest">Entry is limited. Most applications are never reviewed twice.</p>
+              <p className="hover:text-white transition-colors duration-300 pt-2 text-neon font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest">Seats full hone wali hain. No second chances.</p>
             </div>
           </div>
 
@@ -41,20 +39,19 @@ export default function EntryProtocol() {
           <div className="space-y-6 md:space-y-8 flex flex-col h-full justify-between pt-4 md:pt-0">
             
             <div className="space-y-4">
-              <h3 className="font-bold text-xs md:text-sm text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">WHY SEEK ENTRY?</h3>
+              <h3 className="font-bold text-xs md:text-sm text-gray-400 font-[family-name:var(--font-mono)] uppercase tracking-tighter">FAYDA KYA HAI?</h3>
               <div className="font-[family-name:var(--font-sans)] text-sm md:text-base text-gray-300 space-y-2">
-                <p>Accepted members receive access to:</p>
+                <p>Ander aagaye toh yeh milega:</p>
                 <ul className="list-disc pl-5 space-y-1 pt-2">
-                  <li>Ministry Archive</li>
-                  <li>Limited Artifact Releases</li>
-                  <li>Member Communications</li>
-                  <li>Future Field Operations</li>
-                  <li>Restricted Publications</li>
+                  <li>The Secret Archive</li>
+                  <li>Insane Merch Drops</li>
+                  <li>Top Tier Networking (Flex)</li>
+                  <li>And other cool stuff we can't tell you yet.</li>
                 </ul>
               </div>
               <div className="pt-6 mt-6 border-t-2 border-white/10">
                 <p className="font-[family-name:var(--font-brand)] font-bold text-white uppercase tracking-tighter text-lg md:text-xl">
-                  Access is earned, not purchased.
+                  PAISE SE NAHI KHAAREED SAKTE. AUKAT BANAO.
                 </p>
               </div>
             </div>

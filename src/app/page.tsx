@@ -47,8 +47,40 @@ export default function Home() {
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="space-y-2 md:space-y-4"
               >
-                <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase text-white font-[family-name:var(--font-brand)] drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                  MINISTRY <span className="text-[#e1127d] [text-shadow:4px_4px_0_#29b9e5]">OF</span><br /> <span className="whitespace-nowrap">COMMON SENSE</span>
+                <h1 
+                  className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase text-white font-[family-name:var(--font-brand)] drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                >
+                  {"MINISTRY ".split('').map((char, i) => {
+                    const dist = Math.abs(i - 5) / 5;
+                    const scale = 1 + Math.max(0, 1 - dist * dist) * 0.8;
+                    return (
+                      <span key={`l1-${i}`} style={{ fontSize: `${scale}em`, verticalAlign: 'middle', display: 'inline-block', lineHeight: 1 }}>
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    );
+                  })}
+                  <span className="text-[#e1127d] [text-shadow:4px_4px_0_#29b9e5]">
+                    {"OF".split('').map((char, i) => {
+                      const dist = Math.abs((i + 9) - 5) / 5;
+                      const scale = 1 + Math.max(0, 1 - dist * dist) * 0.8;
+                      return (
+                        <span key={`of-${i}`} style={{ fontSize: `${scale}em`, verticalAlign: 'middle', display: 'inline-block', lineHeight: 1 }}>
+                          {char}
+                        </span>
+                      );
+                    })}
+                  </span>
+                  <br /> <span className="whitespace-nowrap">
+                    {"COMMON SENSE".split('').map((char, i) => {
+                      const dist = Math.abs(i - 5.5) / 5.5;
+                      const scale = 1 + Math.max(0, 1 - dist * dist) * 0.8;
+                      return (
+                        <span key={`l2-${i}`} style={{ fontSize: `${scale}em`, verticalAlign: 'middle', display: 'inline-block', lineHeight: 1 }}>
+                          {char === ' ' ? '\u00A0' : char}
+                        </span>
+                      );
+                    })}
+                  </span>
                 </h1>
               </motion.div>
 
@@ -97,34 +129,23 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                    Article I — Why The Ministry Exists
+                    Article I — Why We Exist
                   </h2>
                   <div className="space-y-3 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
-                    <p>The world does not suffer from a lack of information.</p>
-                    <p className="text-white font-bold">It suffers from a lack of judgment.</p>
-                    <p>Every day, people are told what to think, what to buy, what to wear, and what to believe.</p>
-                    <p>Common sense, once ordinary, has become increasingly rare.</p>
-                    <p>The Ministry exists to recognize, reward, and preserve independent thought.</p>
-                    <div className="pt-2 font-[family-name:var(--font-mono)] text-[10px] md:text-xs uppercase text-gray-400 space-y-1">
-                      <p>Not expertise.</p>
-                      <p>Not credentials.</p>
-                      <p>Not popularity.</p>
-                      <p className="text-neon font-bold text-xs md:text-sm pt-1">Common sense.</p>
-                    </div>
+                    <p>Duniya mein gyaan bohot hai, common sense ki bhayankar kami hai.</p>
+                    <p>Everyone's basically a sheep copying influencers. We're just here to reward people who actually use their brains.</p>
+                    <p className="text-neon font-bold pt-2 text-xs md:text-sm">NO DEGREES NEEDED. JUST DON'T BE STUPID.</p>
                   </div>
                 </section>
 
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                    Article II — The Problem We Are Solving
+                    Article II — The Problem
                   </h2>
                   <div className="space-y-3 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
-                    <p>Modern culture rewards attention.</p>
-                    <p className="text-white font-bold">The Ministry rewards discernment.</p>
-                    <p>We believe the most valuable people are often not the loudest people.</p>
-                    <p>They are the observers. The builders. The thinkers.</p>
-                    <p>The people who notice what others ignore.</p>
-                    <p>The Ministry exists to create products, experiences, and communities for those individuals.</p>
+                    <p>Internet clout is a disease, bro. We don't care about your follower count.</p>
+                    <p>We care about the quiet builders who notice stuff.</p>
+                    <p className="text-white font-bold pt-2">We make cool shit just for them. Simple.</p>
                   </div>
                 </section>
               </div>
@@ -149,28 +170,28 @@ export default function Home() {
             >
               <section className="space-y-6">
                 <h2 className="text-xl md:text-3xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                  Article III — What We Believe
+                  Article III — The Vibe Check
                 </h2>
                 <div className="space-y-6 md:space-y-8 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
                   <div className="space-y-1">
-                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">1. Common Sense Is Uncommon</h3>
-                    <p>The obvious is often ignored. The simple is often overlooked. The Ministry values clarity over complexity.</p>
+                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">1. Common Sense Is Ded</h3>
+                    <p>Obvious cheezein bhi logo ko samjhani padti hai aaj kal. We keep it simple.</p>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">2. Quality Over Quantity</h3>
-                    <p>More is not always better. Better is better. Every release should feel intentional.</p>
+                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">2. Quality &gt; Quantity</h3>
+                    <p>Faltu ka kachra nahi banayenge. Better is better.</p>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">3. Rarity Creates Meaning</h3>
-                    <p>Not everyone should own everything. Not every product should be endlessly available. Scarcity is not a marketing tactic. It is respect for craftsmanship.</p>
+                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">3. FOMO is Valid</h3>
+                    <p>Not everyone gets everything. Deal with it.</p>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">4. Membership Is Earned</h3>
-                    <p>Access should not be automatic. The Ministry does not chase people. People seek the Ministry.</p>
+                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">4. VIP Access Only</h3>
+                    <p>"Bhai ek invite dede" won't work. You gotta earn it.</p>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">5. Independent Thinking Matters</h3>
-                    <p>We respect disagreement. We respect curiosity. We respect people who question assumptions. Blind conformity has no value here.</p>
+                    <h3 className="text-white font-[family-name:var(--font-mono)] text-xs md:text-sm uppercase font-bold tracking-widest">5. Think For Yourself</h3>
+                    <p>"Yes sir" bolne walo ki zaroorat nahi hai. Bring your own brain.</p>
                   </div>
                 </div>
               </section>
@@ -196,31 +217,26 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                    Article IV — Who Belongs Here
+                    Article IV — Who's Invited
                   </h2>
                   <div className="space-y-4 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
                     <ul className="list-disc pl-4 space-y-2 marker:text-neon">
-                      <li>Think before speaking.</li>
-                      <li>Value substance over noise.</li>
-                      <li>Appreciate quality.</li>
-                      <li>Prefer originality over imitation.</li>
-                      <li>Understand that access must be earned.</li>
-                      <li>Express themselves through what they create, wear, and contribute.</li>
+                      <li>Log jo bolne se pehle sochte hain.</li>
+                      <li>Jinko asli, original stuff pasand hai.</li>
+                      <li>Jo samajhte hain ki entry free nahi hai.</li>
                     </ul>
                   </div>
                 </section>
 
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-gray-500 border-l-2 border-gray-600 pl-4">
-                    Article V — Who Does Not Belong Here
+                    Article V — Who Can Stay Out
                   </h2>
                   <div className="space-y-4 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-500 line-through decoration-gray-700">
                     <ul className="list-disc pl-4 space-y-2">
-                      <li>People seeking validation.</li>
-                      <li>People seeking status without contribution.</li>
-                      <li>People who believe access is owed to them.</li>
-                      <li>People who confuse attention with value.</li>
-                      <li>People who expect entry simply because they asked for it.</li>
+                      <li>Blue tick ke deewane.</li>
+                      <li>"Bhai, janta nahi mera baap kaun hai?" crowd.</li>
+                      <li>Clout chasers & attention seekers.</li>
                     </ul>
                   </div>
                 </section>
@@ -247,40 +263,36 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                    Article VI — What Acceptance Means
+                    Article VI — The Perks
                   </h2>
                   <div className="space-y-3 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
-                    <p>Acceptance is not admission into a secret club.</p>
-                    <p className="text-white font-bold">Acceptance is recognition.</p>
-                    <p>It means the Ministry believes you align with its values.</p>
-                    <p>Accepted candidates become <span className="text-neon font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest">Founding Members</span>.</p>
+                    <p>It's not an Illuminati cult, bro. It just means you passed the vibe check.</p>
+                    <p>You become a <span className="text-neon font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest">Founding Member</span>.</p>
                     
                     <div className="pt-2 space-y-2">
-                      <p className="text-gray-400 font-[family-name:var(--font-mono)] text-[10px] md:text-xs uppercase">Founding Members receive:</p>
+                      <p className="text-gray-400 font-[family-name:var(--font-mono)] text-[10px] md:text-xs uppercase">What you get:</p>
                       <ul className="list-disc pl-4 space-y-1 text-xs md:text-sm">
-                        <li>Early access.</li>
-                        <li>Voting rights on selected initiatives.</li>
-                        <li>Ownership participation through founding allocations.</li>
-                        <li>Permanent recognition within the Ministry archive.</li>
+                        <li>Early access to everything.</li>
+                        <li>Voting rights (flex).</li>
+                        <li>Basically bragging rights that appreciate over time.</li>
                       </ul>
                     </div>
-                    <p className="pt-2 italic text-xs md:text-sm text-gray-400">Membership is earned once. Its value should increase over time.</p>
                   </div>
                 </section>
 
                 <section className="space-y-4 md:space-y-6">
                   <h2 className="text-xl md:text-2xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white border-l-2 border-neon pl-4">
-                    Article VII — What The Ministry Creates
+                    Article VII — The Merch
                   </h2>
                   <div className="space-y-4 leading-relaxed pl-4 md:pl-6 text-sm md:text-base border-l border-white/10 text-gray-300">
-                    <p>The Ministry creates cultural artifacts. These may take many forms:</p>
+                    <p>Hum kya banate hain? Cultural artifacts.</p>
                     <p className="font-[family-name:var(--font-mono)] text-[10px] md:text-xs text-gray-400 uppercase tracking-widest leading-loose">
-                      Clothing // Objects // Publications // Experiences // Events // Collaborations
+                      KAPDE // GADGETS // EVENTS // RANDOM COOL SHIT
                     </p>
                     <div className="pt-4 space-y-2">
-                      <p>Every artifact must embody the Ministry's principles:</p>
+                      <p>Teen strict rules:</p>
                       <p className="text-white font-bold font-[family-name:var(--font-mono)] uppercase tracking-widest text-xs md:text-sm leading-relaxed">
-                        Quality. <br/>Rarity. <br/>Purpose.
+                        Top tier quality. <br/>Aasani se na mile. <br/>Makes absolute sense.
                       </p>
                     </div>
                   </div>
@@ -307,24 +319,23 @@ export default function Home() {
             >
               <section className="space-y-6">
                 <h2 className="text-2xl md:text-4xl font-[family-name:var(--font-brand)] font-bold tracking-tighter uppercase text-white pb-6 border-b-2 border-white/20">
-                  Article VIII — Long-Term Mission
+                  Article VIII — The Endgame
                 </h2>
                 <div className="space-y-4 leading-relaxed text-sm md:text-base text-gray-300">
-                  <p>The goal is not merely to sell clothing.</p>
-                  <p className="text-white font-bold">The goal is to build the world's most respected institution for independent thinkers.</p>
-                  <p>A symbol recognized globally. A mark of quality. A mark of discernment. A mark of common sense.</p>
-                  <p className="pt-4">One day, seeing someone wearing the Ministry in New York, London, Tokyo, Mumbai, or Dubai should mean something.</p>
-                  <p>Not because it is expensive.</p>
-                  <p className="text-neon font-[family-name:var(--font-brand)] text-xl md:text-3xl uppercase tracking-tighter pt-4">Because it is earned.</p>
+                  <p>T-shirts bechna endgame nahi hai bhai.</p>
+                  <p className="text-white font-bold">We want to build a global cult for independent thinkers.</p>
+                  <p className="pt-4">Agar kal koi hamara merch pehne in NYC, London or Mumbai, it should scream <i>"This guy gets it."</i></p>
+                  <p>Not because it's expensive.</p>
+                  <p className="text-neon font-[family-name:var(--font-brand)] text-xl md:text-3xl uppercase tracking-tighter pt-4">BECAUSE THEY EARNED IT.</p>
                 </div>
               </section>
 
               <div className="pt-12 w-full">
                 <div className="font-[family-name:var(--font-sans)] font-bold text-gray-500 uppercase tracking-widest text-[10px] md:text-xs mb-4">
-                  THE BRAND THESIS
+                  TL;DR
                 </div>
                 <div className="text-white text-sm md:text-lg font-[family-name:var(--font-sans)] tracking-tight leading-relaxed max-w-2xl mx-auto">
-                  "The Ministry of Common Sense is an institution built for people who think for themselves."
+                  "A brand for people who actually use their brains."
                 </div>
               </div>
 

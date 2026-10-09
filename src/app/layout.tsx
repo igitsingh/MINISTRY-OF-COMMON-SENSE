@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Graduate, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { CapsuleNavigation } from "@/components/CapsuleNavigation";
 
 const graduate = Graduate({
   variable: "--font-graduate",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">
           {children}
         </main>
+        <CapsuleNavigation />
       </body>
     </html>
   );
